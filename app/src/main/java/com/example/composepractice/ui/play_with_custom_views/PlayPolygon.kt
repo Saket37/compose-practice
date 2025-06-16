@@ -28,27 +28,6 @@ import androidx.graphics.shapes.Morph
 import androidx.graphics.shapes.RoundedPolygon
 import androidx.graphics.shapes.toPath
 
-@Composable
-fun RightTriangle() {
-    Box(
-        modifier = Modifier
-            .size(200.dp)
-            .drawBehind {
-                val path = Path().apply {
-                    moveTo(100f, 100f)
-                    lineTo(200f, 200f)
-                    lineTo(100f, 200f)
-                    close()
-                }
-                drawPath(path, color = Color.Red)
-            })
-}
-
-@Preview
-@Composable
-private fun RightTrianglePreview() {
-    RightTriangle()
-}
 
 @Composable
 fun PlayWithRectangles(modifier: Modifier = Modifier) {
