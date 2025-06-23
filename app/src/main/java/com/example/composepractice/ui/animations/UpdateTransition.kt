@@ -1,5 +1,8 @@
 package com.example.composepractice.ui.animations
 
+import androidx.compose.animation.animateColor
+import androidx.compose.animation.core.animateDp
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,13 +29,19 @@ private enum class BoxState {
 @Composable
 fun UpdateTransition(modifier: Modifier = Modifier) {
     var boxState by remember { mutableStateOf(BoxState.Small) }
-    val color = when (boxState) {
-        BoxState.Small -> Color.Blue
-        BoxState.Large -> Color.Yellow
+    val transition = updateTransition(targetState = boxState)
+    val color by transition.animateColor { state ->
+        when (state) {
+            BoxState.Small -> Color.Blue
+            BoxState.Large -> Color.Yellow
+        }
     }
-    val size = when (boxState) {
-        BoxState.Small -> 100.dp
-        BoxState.Large -> 200.dp
+
+    val size by transition.animateDp { state ->
+        when (state) {
+            BoxState.Small -> 100.dp
+            BoxState.Large -> 200.dp
+        }
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
